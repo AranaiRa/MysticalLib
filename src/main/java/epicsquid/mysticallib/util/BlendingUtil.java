@@ -20,6 +20,27 @@ public class BlendingUtil {
     }
 
     /**
+     * Transforms a mix float from [-1.0 - 1.0] space to [0.0 - 1.0] space.
+     * @param in The mix range to convert
+     * @return
+     */
+    public static float convertMixRange2ZeroToOne (float in) {
+        in *= 2.0f - 1.0f;
+        return in;
+    }
+
+    /**
+     * Transforms a mix float from [0.0 - 1.0] space to [-1.0 - 1.0] space.
+     * @param in The mix range to convert
+     * @return
+     */
+    public static float convertMixRange2NegativeOneToOne (float in) {
+        in += 1.0f;
+        in *= 0.5f;
+        return in;
+    }
+
+    /**
      * Evaluates a blending function with sharp in and out points and some kind of easing around 0.
      * See the reference image linked at the top of BlendingUtil.java; this function can replicate all of the graphs on the top row.
      *
