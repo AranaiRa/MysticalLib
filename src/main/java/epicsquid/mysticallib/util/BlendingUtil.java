@@ -1,5 +1,7 @@
 package epicsquid.mysticallib.util;
 
+import epicsquid.mysticallib.struct.Vec2d;
+import epicsquid.mysticallib.struct.Vec3f;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 
@@ -42,6 +44,19 @@ public class BlendingUtil {
         return new Vec2f(x, y);
     }
 
+    public static Vec2d oneMinusAbsolutePower(Vec2d left, Vec2d right, float power, float mix) {
+        double x = oneMinusAbsolutePower(left.x, right.x, power, mix);
+        double y = oneMinusAbsolutePower(left.y, right.y, power, mix);
+        return new Vec2d(x, y);
+    }
+
+    public static Vec3f oneMinusAbsolutePower(Vec3f left, Vec3f right, float power, float mix) {
+        float x = oneMinusAbsolutePower(left.x, right.x, power, mix);
+        float y = oneMinusAbsolutePower(left.y, right.y, power, mix);
+        float z = oneMinusAbsolutePower(left.z, right.z, power, mix);
+        return new Vec3f(x, y, z);
+    }
+
     public static Vec3d oneMinusAbsolutePower(Vec3d left, Vec3d right, float power, float mix) {
         double x = oneMinusAbsolutePower(left.x, right.x, power, mix);
         double y = oneMinusAbsolutePower(left.y, right.y, power, mix);
@@ -73,6 +88,19 @@ public class BlendingUtil {
         float x = exponentialCosine(left.x, right.x, power, mix);
         float y = exponentialCosine(left.y, right.y, power, mix);
         return new Vec2f(x, y);
+    }
+
+    public static Vec2d exponentialCosine(Vec2d left, Vec2d right, float power, float mix) {
+        double x = exponentialCosine(left.x, right.x, power, mix);
+        double y = exponentialCosine(left.y, right.y, power, mix);
+        return new Vec2d(x, y);
+    }
+
+    public static Vec3f exponentialCosine(Vec3f left, Vec3f right, float power, float mix) {
+        float x = exponentialCosine(left.x, right.x, power, mix);
+        float y = exponentialCosine(left.y, right.y, power, mix);
+        float z = exponentialCosine(left.z, right.z, power, mix);
+        return new Vec3f(x, y, z);
     }
 
     public static Vec3d exponentialCosine(Vec3d left, Vec3d right, float power, float mix) {
@@ -108,6 +136,19 @@ public class BlendingUtil {
         return new Vec2f(x, y);
     }
 
+    public static Vec2d oneMinusExponentialSine(Vec2d left, Vec2d right, float power, float mix) {
+        double x = oneMinusExponentialSine(left.x, right.x, power, mix);
+        double y = oneMinusExponentialSine(left.y, right.y, power, mix);
+        return new Vec2d(x, y);
+    }
+
+    public static Vec3f oneMinusExponentialSine(Vec3f left, Vec3f right, float power, float mix) {
+        float x = oneMinusExponentialSine(left.x, right.x, power, mix);
+        float y = oneMinusExponentialSine(left.y, right.y, power, mix);
+        float z = oneMinusExponentialSine(left.z, right.z, power, mix);
+        return new Vec3f(x, y, z);
+    }
+
     public static Vec3d oneMinusExponentialSine(Vec3d left, Vec3d right, float power, float mix) {
         double x = oneMinusExponentialSine(left.x, right.x, power, mix);
         double y = oneMinusExponentialSine(left.y, right.y, power, mix);
@@ -141,6 +182,19 @@ public class BlendingUtil {
         return new Vec2f(x, y);
     }
 
+    public static Vec2d exponentialMinimizedCosine(Vec2d left, Vec2d right, float power, float mix) {
+        double x = exponentialMinimizedCosine(left.x, right.x, power, mix);
+        double y = exponentialMinimizedCosine(left.y, right.y, power, mix);
+        return new Vec2d(x, y);
+    }
+
+    public static Vec3f exponentialMinimizedCosine(Vec3f left, Vec3f right, float power, float mix) {
+        float x = exponentialMinimizedCosine(left.x, right.x, power, mix);
+        float y = exponentialMinimizedCosine(left.y, right.y, power, mix);
+        float z = exponentialMinimizedCosine(left.z, right.z, power, mix);
+        return new Vec3f(x, y, z);
+    }
+
     public static Vec3d exponentialMinimizedCosine(Vec3d left, Vec3d right, float power, float mix) {
         double x = exponentialMinimizedCosine(left.x, right.x, power, mix);
         double y = exponentialMinimizedCosine(left.y, right.y, power, mix);
@@ -172,6 +226,19 @@ public class BlendingUtil {
         float x = maximizedPlateau(left.x, right.x, power, mix);
         float y = maximizedPlateau(left.y, right.y, power, mix);
         return new Vec2f(x, y);
+    }
+
+    public static Vec2d maximizedPlateau(Vec2d left, Vec2d right, float power, float mix) {
+        double x = maximizedPlateau(left.x, right.x, power, mix);
+        double y = maximizedPlateau(left.y, right.y, power, mix);
+        return new Vec2d(x, y);
+    }
+
+    public static Vec3f maximizedPlateau(Vec3f left, Vec3f right, float power, float mix) {
+        float x = maximizedPlateau(left.x, right.x, power, mix);
+        float y = maximizedPlateau(left.y, right.y, power, mix);
+        float z = maximizedPlateau(left.z, right.z, power, mix);
+        return new Vec3f(x, y, z);
     }
 
     public static Vec3d maximizedPlateau(Vec3d left, Vec3d right, float power, float mix) {
