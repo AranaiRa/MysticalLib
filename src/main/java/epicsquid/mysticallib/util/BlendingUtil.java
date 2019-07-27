@@ -2,6 +2,7 @@ package epicsquid.mysticallib.util;
 
 import epicsquid.mysticallib.struct.Vec2d;
 import epicsquid.mysticallib.struct.Vec3f;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 
@@ -64,6 +65,13 @@ public class BlendingUtil {
         return new Vec3d(x, y, z);
     }
 
+    public static BlockPos oneMinusAbsolutePower(BlockPos left, BlockPos right, float power, float mix) {
+        double x = oneMinusAbsolutePower((double)left.getX(), (double)right.getX(), power, mix);
+        double y = oneMinusAbsolutePower((double)left.getY(), (double)right.getY(), power, mix);
+        double z = oneMinusAbsolutePower((double)left.getZ(), (double)right.getZ(), power, mix);
+        return new BlockPos(x, y, z);
+    }
+
     /**
      * Evaluates a blending function using a cosine-based function.
      * See the reference image linked at the top of BlendingUtil.java; this function can replicate all of the graphs on the second row.
@@ -108,6 +116,13 @@ public class BlendingUtil {
         double y = exponentialCosine(left.y, right.y, power, mix);
         double z = exponentialCosine(left.z, right.z, power, mix);
         return new Vec3d(x, y, z);
+    }
+
+    public static BlockPos exponentialCosine(BlockPos left, BlockPos right, float power, float mix) {
+        double x = exponentialCosine((double)left.getX(), (double)right.getX(), power, mix);
+        double y = exponentialCosine((double)left.getY(), (double)right.getY(), power, mix);
+        double z = exponentialCosine((double)left.getZ(), (double)right.getZ(), power, mix);
+        return new BlockPos(x, y, z);
     }
 
     /**
@@ -156,6 +171,13 @@ public class BlendingUtil {
         return new Vec3d(x, y, z);
     }
 
+    public static BlockPos oneMinusExponentialSine(BlockPos left, BlockPos right, float power, float mix) {
+        double x = oneMinusExponentialSine((double)left.getX(), (double)right.getX(), power, mix);
+        double y = oneMinusExponentialSine((double)left.getY(), (double)right.getY(), power, mix);
+        double z = oneMinusExponentialSine((double)left.getZ(), (double)right.getZ(), power, mix);
+        return new BlockPos(x, y, z);
+    }
+
     /**
      * Evaluates a blending function using a minimized comparison between a cosine or an absolute function.
      * See the reference image linked at the top of BlendingUtil.java; this function can replicate all of the graphs on the fourth row.
@@ -202,6 +224,13 @@ public class BlendingUtil {
         return new Vec3d(x, y, z);
     }
 
+    public static BlockPos exponentialMinimizedCosine(BlockPos left, BlockPos right, float power, float mix) {
+        double x = exponentialMinimizedCosine((double)left.getX(), (double)right.getX(), power, mix);
+        double y = exponentialMinimizedCosine((double)left.getY(), (double)right.getY(), power, mix);
+        double z = exponentialMinimizedCosine((double)left.getZ(), (double)right.getZ(), power, mix);
+        return new BlockPos(x, y, z);
+    }
+
     /**
      * Evaluates a blending function that results in the right value for half of the function's lifespan (-0.5 to 0.5).
      * See the reference image linked at the top of BlendingUtil.java; this function can replicate all of the graphs on the bottom row.
@@ -246,5 +275,12 @@ public class BlendingUtil {
         double y = maximizedPlateau(left.y, right.y, power, mix);
         double z = maximizedPlateau(left.z, right.z, power, mix);
         return new Vec3d(x, y, z);
+    }
+
+    public static BlockPos maximizedPlateau(BlockPos left, BlockPos right, float power, float mix) {
+        double x = maximizedPlateau((double)left.getX(), (double)right.getX(), power, mix);
+        double y = maximizedPlateau((double)left.getY(), (double)right.getY(), power, mix);
+        double z = maximizedPlateau((double)left.getZ(), (double)right.getZ(), power, mix);
+        return new BlockPos(x, y, z);
     }
 }
