@@ -17,6 +17,7 @@ public class CommonProxy {
     LibRegistry.initAll();
     PacketHandler.registerMessages();
     MinecraftForge.EVENT_BUS.post(new RegisterFXEvent());
+    MysticalLib.logger = event.getModLog();
   }
 
   public void init(FMLInitializationEvent event) {
