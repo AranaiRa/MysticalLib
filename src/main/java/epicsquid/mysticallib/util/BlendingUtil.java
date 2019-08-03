@@ -20,6 +20,29 @@ public class BlendingUtil {
     }
 
     /**
+     * Generates a function that bounces back and forth from 0 to 1 linearly.
+     * @param in The time of the function
+     * @return A value between 0..1
+     */
+    public static float zigZag(float in) {
+        float a = (float) (-1.0f + 2.0f * (Math.floor(in) % 2.0));
+        float b = (float) -(Math.floor(in) % 2.0f);
+        return (float) -((in - Math.floor(in)) * a + b);
+    }
+
+    public static float zigZag(double in) {
+        float a = (float) (-1.0f + 2.0f * (Math.floor(in) % 2.0));
+        float b = (float) -(Math.floor(in) % 2.0f);
+        return (float) -((in - Math.floor(in)) * a + b);
+    }
+
+    public static float zigZag(long in) {
+        float a = (float) (-1.0 + 2.0 * (Math.floor(in) % 2.0));
+        float b = (float) -(Math.floor(in) % 2.0f);
+        return (float) -((in - Math.floor(in)) * a + b);
+    }
+
+    /**
      * Transforms a mix float from [-1.0 - 1.0] space to [0.0 - 1.0] space.
      * @param in The mix range to convert
      * @return
