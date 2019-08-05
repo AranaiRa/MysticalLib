@@ -19,15 +19,22 @@ public class BlendingUtil {
         return in;
     }
 
+    private static float clampToRestrictedExtents(float in) {
+        if (in < 0) in = 0;
+        if (in > 1) in = 1;
+        return in;
+    }
+
     /**
      * Generates a function that bounces back and forth from 0 to 1 linearly.
      * @param in The time of the function
      * @return A value between 0..1
      */
     public static float zigZag(float in) {
-        float a = (float) (-1.0f + 2.0f * (Math.floor(in) % 2.0));
-        float b = (float) -(Math.floor(in) % 2.0f);
-        return (float) -((in - Math.floor(in)) * a + b);
+        float a = -1.0f + 2.0f * ((float)Math.floor(in) % 2);
+        float b = -((float)Math.floor(in) % 2);
+        float c = in - (float)Math.floor(in);
+        return Math.abs(a*c+b);
     }
 
     public static float zigZag(double in) {
@@ -325,6 +332,108 @@ public class BlendingUtil {
         double x = maximizedPlateau((double)left.getX(), (double)right.getX(), power, mix);
         double y = maximizedPlateau((double)left.getY(), (double)right.getY(), power, mix);
         double z = maximizedPlateau((double)left.getZ(), (double)right.getZ(), power, mix);
+        return new BlockPos(x, y, z);
+    }
+
+    /**
+     * Evaluates a blending function from 0..1 that eases in the middle for a bit
+     * @param left  The value when the expression evaluates to 0.0
+     * @param right The value when the expression evaluates to 1.0
+     * @param mix   A value between 0.0 and 1.0 fed into the expression. 0 or will always evaluate very close to 0, 1 will always evaluate very close to 1.
+     * @return
+     */
+    public static double cubicHoldZeroToOne(double left, double right, float mix) {
+        mix = clampToRestrictedExtents(mix);
+        double point = (mix - 0.5) * Math.PI * 0.5;
+        double out = (right-left) * point + left;
+        return out;
+    }
+
+    public static float cubicHoldZeroToOne(float left, float right, float mix) {
+        return (float) cubicHoldZeroToOne((double) left, (double) right, mix);
+    }
+
+    public static Vec2f cubicHoldZeroToOne(Vec2f left, Vec2f right, float power, float mix) {
+        float x = cubicHoldZeroToOne(left.x, right.x, mix);
+        float y = cubicHoldZeroToOne(left.y, right.y, mix);
+        return new Vec2f(x, y);
+    }
+
+    public static Vec2d cubicHoldZeroToOne(Vec2d left, Vec2d right, float mix) {
+        double x = cubicHoldZeroToOne(left.x, right.x, mix);
+        double y = cubicHoldZeroToOne(left.y, right.y, mix);
+        return new Vec2d(x, y);
+    }
+
+    public static Vec3f cubicHoldZeroToOne(Vec3f left, Vec3f right, float mix) {
+        float x = cubicHoldZeroToOne(left.x, right.x, mix);
+        float y = cubicHoldZeroToOne(left.y, right.y, mix);
+        float z = cubicHoldZeroToOne(left.z, right.z, mix);
+        return new Vec3f(x, y, z);
+    }
+
+    public static Vec3d cubicHoldZeroToOne(Vec3d left, Vec3d right, float mix) {
+        double x = cubicHoldZeroToOne(left.x, right.x, mix);
+        double y = cubicHoldZeroToOne(left.y, right.y, mix);
+        double z = cubicHoldZeroToOne(left.z, right.z, mix);
+        return new Vec3d(x, y, z);
+    }
+
+    public static BlockPos cubicHoldZeroToOne(BlockPos left, BlockPos right, float mix) {
+        double x = cubicHoldZeroToOne((double)left.getX(), (double)right.getX(), mix);
+        double y = cubicHoldZeroToOne((double)left.getY(), (double)right.getY(), mix);
+        double z = cubicHoldZeroToOne((double)left.getZ(), (double)right.getZ(), mix);
+        return new BlockPos(x, y, z);
+    }
+
+    /**
+     * Evaluates a blending function from 0..1 that eases harshly toward maximum before dipping back down to zero
+     * @param left  The value when the expression evaluates to 0.0
+     * @param right The value when the expression evaluates to 1.0
+     * @param mix   A value between 0.0 and 1.0 fed into the expression. 0 or 1 or will always evaluate to 0, 0.5 will always evaluate to 1.
+     * @return
+     */
+    public static double quarticHump(double left, double right, float mix) {
+        mix = clampToRestrictedExtents(mix);
+        double point = -Math.pow((mix - 0.5) * 2.0, 4.0) + 1.0;
+        double out = (right-left) * point + left;
+        return out;
+    }
+
+    public static float quarticHump(float left, float right, float mix) {
+        return (float) quarticHump((double) left, (double) right, mix);
+    }
+
+    public static Vec2f quarticHump(Vec2f left, Vec2f right, float power, float mix) {
+        float x = quarticHump(left.x, right.x, mix);
+        float y = quarticHump(left.y, right.y, mix);
+        return new Vec2f(x, y);
+    }
+
+    public static Vec2d quarticHump(Vec2d left, Vec2d right, float mix) {
+        double x = quarticHump(left.x, right.x, mix);
+        double y = quarticHump(left.y, right.y, mix);
+        return new Vec2d(x, y);
+    }
+
+    public static Vec3f quarticHump(Vec3f left, Vec3f right, float mix) {
+        float x = quarticHump(left.x, right.x, mix);
+        float y = quarticHump(left.y, right.y, mix);
+        float z = quarticHump(left.z, right.z, mix);
+        return new Vec3f(x, y, z);
+    }
+
+    public static Vec3d quarticHump(Vec3d left, Vec3d right, float mix) {
+        double x = quarticHump(left.x, right.x, mix);
+        double y = quarticHump(left.y, right.y, mix);
+        double z = quarticHump(left.z, right.z, mix);
+        return new Vec3d(x, y, z);
+    }
+
+    public static BlockPos quarticHump(BlockPos left, BlockPos right, float mix) {
+        double x = quarticHump((double)left.getX(), (double)right.getX(), mix);
+        double y = quarticHump((double)left.getY(), (double)right.getY(), mix);
+        double z = quarticHump((double)left.getZ(), (double)right.getZ(), mix);
         return new BlockPos(x, y, z);
     }
 }
