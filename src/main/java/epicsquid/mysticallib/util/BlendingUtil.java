@@ -436,4 +436,55 @@ public class BlendingUtil {
         double z = quarticHump((double)left.getZ(), (double)right.getZ(), mix);
         return new BlockPos(x, y, z);
     }
+
+    /**
+     * Evaluates a blending function from 0..1 that eases toward maximum before dipping back down to zero
+     * @param left  The value when the expression evaluates to 0.0
+     * @param right The value when the expression evaluates to 1.0
+     * @param mix   A value between 0.0 and 1.0 fed into the expression. 0 or 1 or will always evaluate to 0, 0.5 will always evaluate to 1.
+     * @return
+     */
+    public static double quadraticHump(double left, double right, float mix) {
+        mix = clampToRestrictedExtents(mix);
+        double point = -Math.pow((mix - 0.5) * 2.0, 2.0) + 1.0;
+        double out = (right-left) * point + left;
+        return out;
+    }
+
+    public static float quadraticHump(float left, float right, float mix) {
+        return (float) quadraticHump((double) left, (double) right, mix);
+    }
+
+    public static Vec2f quadraticHump(Vec2f left, Vec2f right, float power, float mix) {
+        float x = quadraticHump(left.x, right.x, mix);
+        float y = quadraticHump(left.y, right.y, mix);
+        return new Vec2f(x, y);
+    }
+
+    public static Vec2d quadraticHump(Vec2d left, Vec2d right, float mix) {
+        double x = quadraticHump(left.x, right.x, mix);
+        double y = quadraticHump(left.y, right.y, mix);
+        return new Vec2d(x, y);
+    }
+
+    public static Vec3f quadraticHump(Vec3f left, Vec3f right, float mix) {
+        float x = quadraticHump(left.x, right.x, mix);
+        float y = quadraticHump(left.y, right.y, mix);
+        float z = quadraticHump(left.z, right.z, mix);
+        return new Vec3f(x, y, z);
+    }
+
+    public static Vec3d quadraticHump(Vec3d left, Vec3d right, float mix) {
+        double x = quadraticHump(left.x, right.x, mix);
+        double y = quadraticHump(left.y, right.y, mix);
+        double z = quadraticHump(left.z, right.z, mix);
+        return new Vec3d(x, y, z);
+    }
+
+    public static BlockPos quadraticHump(BlockPos left, BlockPos right, float mix) {
+        double x = quadraticHump((double)left.getX(), (double)right.getX(), mix);
+        double y = quadraticHump((double)left.getY(), (double)right.getY(), mix);
+        double z = quadraticHump((double)left.getZ(), (double)right.getZ(), mix);
+        return new BlockPos(x, y, z);
+    }
 }
