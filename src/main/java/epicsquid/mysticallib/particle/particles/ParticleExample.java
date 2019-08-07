@@ -1,6 +1,6 @@
 package epicsquid.mysticallib.particle.particles;
 
-import epicsquid.mysticallib.particle.ParticleBaseAdvanced;
+import epicsquid.mysticallib.particle.ParticleAdvanced;
 import epicsquid.mysticallib.particle.ParticleDynamics;
 import epicsquid.mysticallib.util.BlendingUtil;
 import net.minecraft.util.math.Vec3d;
@@ -9,9 +9,9 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 
 /**
- * An example of the type of stuff you can do with a ParticleBaseAdvanced
+ * An example of the type of stuff you can do with a ParticleAdvanced
  */
-public class ParticleExample extends ParticleBaseAdvanced {
+public class ParticleExample extends ParticleAdvanced {
     float heightJitter, radiusJitter, revJitter, scaleJitter;
 
     public ParticleExample(@Nonnull World world, double x, double y, double z, double vx, double vy, double vz, double[] data) {

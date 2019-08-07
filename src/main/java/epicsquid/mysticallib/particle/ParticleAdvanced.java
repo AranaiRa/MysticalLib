@@ -1,21 +1,20 @@
 package epicsquid.mysticallib.particle;
 
-import epicsquid.mysticallib.MysticalLib;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public abstract class ParticleBaseAdvanced extends ParticleBase {
+public abstract class ParticleAdvanced extends ParticleBase {
     public static Random random = new Random();
 
     public Vec3d actualPosition, actualSpeed;
     public float initAlpha, initScale, initTheta;
     public int emitterBeginAge;
-    public ParticleBaseAdvanced[] subemitters;
+    public ParticleAdvanced[] subemitters;
 
-    public ParticleBaseAdvanced(@Nonnull World world, double x, double y, double z, double vx, double vy, double vz, double[] data) {
+    public ParticleAdvanced(@Nonnull World world, double x, double y, double z, double vx, double vy, double vz, double[] data) {
         super(world, x, y, z, vx, vy, vz, data);
         this.particleMaxAge = (int) data[ParticleParams.MAXIMUM_LIFESPAN];
         actualPosition = new Vec3d(x, y, z);

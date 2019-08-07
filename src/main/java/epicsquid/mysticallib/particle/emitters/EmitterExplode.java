@@ -1,11 +1,7 @@
 package epicsquid.mysticallib.particle.emitters;
 
-import epicsquid.mysticallib.MysticalLib;
-import epicsquid.mysticallib.particle.ParticleBaseAdvanced;
 import epicsquid.mysticallib.particle.ParticleEmitter;
 import epicsquid.mysticallib.particle.ParticleParams;
-import epicsquid.mysticallib.struct.Vec3f;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 

@@ -84,11 +84,11 @@ public class ParticleParams {
                 data);
 
         if(subemitter.size() != 0) {
-            if(pba instanceof ParticleBaseAdvanced) {
-                ((ParticleBaseAdvanced) pba).subemitters = (ParticleBaseAdvanced[]) subemitter.toArray();
+            if(pba instanceof ParticleAdvanced) {
+                ((ParticleAdvanced) pba).subemitters = (ParticleAdvanced[]) subemitter.toArray();
             }
             else
-                MysticalLib.logger.warn("WARNING: Can only attach a sub-emitter to ParticleBaseAdvanced and its subclasses. Aborting.");
+                MysticalLib.logger.warn("WARNING: Can only attach a sub-emitter to ParticleAdvanced and its subclasses. Aborting.");
         }
     }
 
