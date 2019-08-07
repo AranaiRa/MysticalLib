@@ -21,11 +21,7 @@ import epicsquid.mysticallib.model.ICustomModeledObject;
 import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.mysticallib.model.block.BakedModelBlockUnlitWrapper;
 import epicsquid.mysticallib.particle.ParticleRegistry;
-import epicsquid.mysticallib.particle.particles.ParticleFlame;
-import epicsquid.mysticallib.particle.particles.ParticleGlitter;
-import epicsquid.mysticallib.particle.particles.ParticleGlow;
-import epicsquid.mysticallib.particle.particles.ParticleSmoke;
-import epicsquid.mysticallib.particle.particles.ParticleSpark;
+import epicsquid.mysticallib.particle.particles.*;
 import epicsquid.mysticallib.util.Util;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -266,6 +262,7 @@ public class LibRegistry {
   }
 
   public static String PARTICLE_GLOW, PARTICLE_SMOKE, PARTICLE_SPARK, PARTICLE_GLITTER, PARTICLE_FLAME;
+  public static String PARTICLE_WHITE_RING;
 
   @SideOnly(Side.CLIENT)
   @SubscribeEvent
@@ -276,5 +273,7 @@ public class LibRegistry {
     PARTICLE_GLITTER = ParticleRegistry
         .registerParticle(MysticalLib.MODID, ParticleGlitter.class, new ResourceLocation("mysticallib:particle/particle_sparkle"));
     PARTICLE_FLAME = ParticleRegistry.registerParticle(MysticalLib.MODID, ParticleFlame.class, new ResourceLocation("mysticallib:particle/particle_fire"));
+
+    PARTICLE_WHITE_RING = ParticleRegistry.registerParticle(MysticalLib.MODID, ParticleExample.class, new ResourceLocation("mysticallib:particle/particle_ring_white_16x"));
   }
 }

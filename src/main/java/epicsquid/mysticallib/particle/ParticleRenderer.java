@@ -128,13 +128,18 @@ public class ParticleRenderer {
     }
   }
 
-  public void spawnParticle(World world, String particle, double x, double y, double z, double vx, double vy, double vz, double... data) {
+  public ParticleBase spawnParticle(World world, String particle, double x, double y, double z, double vx, double vy, double vz, double... data) {
+    ParticleBase generated = null;
+
     if (MysticalLib.proxy instanceof ClientProxy) {
       try {
-        particles.add(ParticleRegistry.getParticles().get(particle).newInstance(world, x, y, z, vx, vy, vz, data));
+        generated = ParticleRegistry.getParticles().get(particle).newInstance(world, x, y, z, vx, vy, vz, data);
+        particles.add(generated);
       } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
         e.printStackTrace();
       }
     }
+
+    return generated;
   }
 }

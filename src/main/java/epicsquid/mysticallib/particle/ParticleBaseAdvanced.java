@@ -1,5 +1,6 @@
 package epicsquid.mysticallib.particle;
 
+import epicsquid.mysticallib.MysticalLib;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -11,6 +12,8 @@ public abstract class ParticleBaseAdvanced extends ParticleBase {
 
     public Vec3d actualPosition, actualSpeed;
     public float initAlpha, initScale, initTheta;
+    public int emitterBeginAge;
+    public ParticleBaseAdvanced[] subemitters;
 
     public ParticleBaseAdvanced(@Nonnull World world, double x, double y, double z, double vx, double vy, double vz, double[] data) {
         super(world, x, y, z, vx, vy, vz, data);
@@ -33,18 +36,30 @@ public abstract class ParticleBaseAdvanced extends ParticleBase {
         this.initAlpha = (float) data[ParticleParams.ALPHA];
         this.initScale = (float) data[ParticleParams.SCALE];
         this.initTheta = (float) data[ParticleParams.THETA];
+        this.particleAge = (int) -data[ParticleParams.PARTICLE_DELAY];
+        this.emitterBeginAge = (int) data[ParticleParams.SUBEMITTER_DELAY];
 
         this.particleScale = initScale;
     }
 
     @Override
     public void onUpdate() {
-        super.onUpdate();
-        actualPosition = actualPosition.add(actualSpeed);
-        Vec3d offset = getOffset();
-        this.posX = actualPosition.x + offset.x;
-        this.posY = actualPosition.y + offset.y;
-        this.posZ = actualPosition.z + offset.z;
+        if(particleAge < 0) {
+            particleAge++;
+        }
+        else {
+            super.onUpdate();
+            actualPosition = actualPosition.add(actualSpeed);
+            Vec3d offset = getOffset();
+            this.posX = actualPosition.x + offset.x;
+            this.posY = actualPosition.y + offset.y;
+            this.posZ = actualPosition.z + offset.z;
+            //MysticalLib.logger.info(this.particleAngle);
+
+            if(particleAge == emitterBeginAge) {
+
+            }
+        }
     }
 
     public Vec3d getOffset() {

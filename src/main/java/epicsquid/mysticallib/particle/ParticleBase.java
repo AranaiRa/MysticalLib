@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+@Deprecated
 public class ParticleBase extends Particle implements IParticle {
 
   private int lifetime = 0;
