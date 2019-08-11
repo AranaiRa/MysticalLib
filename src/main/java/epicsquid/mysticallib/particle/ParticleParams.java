@@ -17,25 +17,37 @@ import java.util.Random;
 public class ParticleParams {
     public static Random random = new Random();
 
-    private static final int TOTAL_PARAM_COUNT = 11;
+    private static final int TOTAL_PARAM_COUNT = 13;
     private ArrayList<ParticleEmitter> subemitter = new ArrayList<>();
 
-    public static final int
-    MAXIMUM_LIFESPAN = 0,
-    TINT_RED = 1,
-    TINT_GREEN = 2,
-    TINT_BLUE = 3,
-    ALPHA = 4,
-    SCALE = 5,
-    THETA = 6,
-    PARTICLE_DELAY = 7,
-    SUBEMITTER_DELAY = 8,
-    ANGLE_START = 9,
-    ANGLE_SPEED = 10;
+    //How long in ticks the particle lasts before disappearing.
+    public static final int MAXIMUM_LIFESPAN = 0;
+    //What color to multiply the particle texture by.
+    public static final int TINT_RED = 1;
+    public static final int TINT_GREEN = 2;
+    public static final int TINT_BLUE = 3;
+    //What alpha the particle begins at.
+    public static final int ALPHA = 4;
+    //What scale the particle begins at.
+    public static final int SCALE = 5;
+    //A value used for starting positions in some ParticleDynamics patterns. Not all particles will use this value.
+    public static final int THETA = 6;
+    //How long in ticks until the particle begins its lifetime.
+    public static final int PARTICLE_DELAY = 7;
+    //How long in ticks until the subemitters, if any, begin.
+    public static final int SUBEMITTER_DELAY = 8;
+    //What rotation in radians the particle begins at.
+    public static final int ANGLE_START = 9;
+    //How quickly in radians the particle rotates per tick.
+    public static final int ANGLE_SPEED = 10;
+    //How much speed the particle loses when it collides with a surface and bounces. 1.0 is no loss, 0.0 is a complete stop. Only particles capable of collision can use this value.
+    public static final int BOUNCINESS = 11;
+    //How much the particle is affected by gravity. 1.0 is normal.
+    public static final int GRAVITY = 12;
 
     protected Class clazz;
     protected Vec3d position, speed, tint;
-    protected float alpha, scale, theta, angleStart, angleSpeed;
+    protected float alpha, scale, theta, angleStart, angleSpeed, bounciness, gravity;
     protected int maxAge, particleDelay, subEmitterDelay;
 
     public ParticleParams(Class clazz) {
@@ -48,6 +60,10 @@ public class ParticleParams {
         this.theta = 0.0f;
         this.particleDelay = 0;
         this.subEmitterDelay = 0;
+        this.angleStart = 0.0f;
+        this.angleSpeed = 0.0f;
+        this.bounciness = 0.5f;
+        this.gravity = 0.0f;
     }
 
     public ParticleParams(Class clazz, int maxAge, Vec3d position, Vec3d speed, float alpha, float scale) {
@@ -61,6 +77,10 @@ public class ParticleParams {
         this.theta = 0.0f;
         this.particleDelay = 0;
         this.subEmitterDelay = 0;
+        this.angleStart = 0.0f;
+        this.angleSpeed = 0.0f;
+        this.bounciness = 0.5f;
+        this.gravity = 0.0f;
     }
 
     public void spawnParticle(World world) {
@@ -76,6 +96,10 @@ public class ParticleParams {
         data[SUBEMITTER_DELAY] = subEmitterDelay;
         data[ANGLE_START] = angleStart;
         data[ANGLE_SPEED] = angleSpeed;
+        data[BOUNCINESS] = bounciness;
+        data[GRAVITY] = gravity;
+
+        MysticalLib.logger.info("param speed="+speed);
 
         ParticleBase pba = ClientProxy.particleRenderer.spawnParticle(world,
                 Util.getLowercaseClassName(clazz),
@@ -121,7 +145,7 @@ public class ParticleParams {
     }
 
     public void setSpeed(Vec3d value) {
-        this.speed = speed;
+        this.speed = value;
     }
 
     public void setSpeed(BlockPos value) {
@@ -227,7 +251,8 @@ public class ParticleParams {
         this.subEmitterDelay = (int) (random.nextFloat() * ((float)maxValue - (float)minValue) + (float)minValue);
     }
 
-    public float getStartAngle() {
+    //TODO: Figure out why these are flipping the fuck out
+    /*public float getStartAngle() {
         return angleStart;
     }
 
@@ -249,5 +274,30 @@ public class ParticleParams {
 
     public void setRotationSpeed(float minValue, float maxValue) {
         this.angleSpeed = random.nextFloat() * (maxValue - minValue) + minValue;
+    }*/
+
+    //TODO: Figure out particle collisions
+    /*public float getGravityMultiplier() {
+        return gravity;
     }
+
+    public void setGravityMultiplier(float value) {
+        this.gravity = value;
+    }
+
+    public void setGravityMultiplier(float minValue, float maxValue) {
+        this.gravity = random.nextFloat() * (maxValue - minValue) + minValue;
+    }
+
+    public float getBounciness() {
+        return bounciness;
+    }
+
+    public void setBounciness(float value) {
+        this.bounciness = value;
+    }
+
+    public void setBounciness(float minValue, float maxValue) {
+        this.bounciness = random.nextFloat() * (maxValue - minValue) + minValue;
+    }*/
 }

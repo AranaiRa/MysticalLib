@@ -27,7 +27,7 @@ public class ParticleBase extends Particle implements IParticle {
     TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(texture.toString());
     this.setParticleTexture(sprite);
     this.particleScale = 1.0f;
-    this.canCollide = false;
+    //this.canCollide = false;
   }
 
   @Override
